@@ -47,7 +47,7 @@ module.exports = function (templateDirectories, outputFile, options) {
     	amdDependencies = options.amdDependencies.toString();
     }
 
-    var namespace = _.isString(options.namespace) ? options.namespace : '';
+    var namespace = originalNamespace = _.isString(options.namespace) ? options.namespace : '';
     var folders = [];
     var templates = [];
     var _readTemplates = [];
@@ -174,6 +174,7 @@ module.exports = function (templateDirectories, outputFile, options) {
 
     var indentOutput = output.split('\n').map(function (l) { return l ? '    ' + l : l; }).join('\n');
     var finalOutput = outputTemplate
+        .replace(/\{\{originalNamespace\}\}/g, originalNamespace)
         .replace(/\{\{namespace\}\}/g, namespace)
         .replace(/\{\{internalNamespace\}\}/g, internalNamespace)
         .replace('{{jade}}', wrappedJade)
