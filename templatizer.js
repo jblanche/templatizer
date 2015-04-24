@@ -100,7 +100,7 @@ module.exports = function (templateDirectories, outputFile, options) {
               return;
             }
             // Skip files not matching the initial globbing pattern
-            if (templateDirectories.indexOf(file) === -1) {
+            if (templateDirectories.indexOf(file.replace(pathSepRegExp, "/")) === -1) {
               return;
             }
             if (path.extname(item) === '' && path.basename(item).charAt(0) !== '.') {
